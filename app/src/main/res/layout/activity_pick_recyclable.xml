@@ -13,18 +13,18 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/AppTheme"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:layout_editor_absoluteX="0dp" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivRecycleLogo"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
@@ -44,21 +44,24 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivBottle"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
                 android:padding="20dp"
-
+                app:civ_border_color="#666666"
+                app:civ_border_width="2dp"
                 android:src="@android:drawable/star_big_off" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivPaper"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
                 android:padding="20dp"
 
-                android:src="@android:drawable/star_big_off" />
+                android:src="@android:drawable/star_big_off"
+                app:civ_border_color="#666666"
+                app:civ_border_width="2dp" />
 
         </LinearLayout>
 
@@ -67,19 +70,21 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivCap"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
                 android:padding="20dp"
-
+                app:civ_border_color="#666666"
+                app:civ_border_width="2dp"
                 android:src="@android:drawable/star_big_off" />
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivTetrapak"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
                 android:padding="20dp"
-
+                app:civ_border_color="#666666"
+                app:civ_border_width="2dp"
                 android:src="@android:drawable/star_big_off" />
 
         </LinearLayout>
@@ -89,19 +94,21 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivGlassBottle"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
                 android:padding="20dp"
-
+                app:civ_border_color="#666666"
+                app:civ_border_width="2dp"
                 android:src="@android:drawable/star_big_off" />
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivBaterias"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
                 android:padding="20dp"
-
+                app:civ_border_color="#666666"
+                app:civ_border_width="2dp"
                 android:src="@android:drawable/star_big_off" />
 
         </LinearLayout>
@@ -110,12 +117,72 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#FF0000"
+        android:background="#5EBBDEFB"
+        android:id="@+id/rvBarrioMain"
+        app:layout_constraintBottom_toTopOf="@+id/rvProfileMain">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:id="@+id/flBarrioProgressMain"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="130dp"
+            android:background="?attr/colorAccent"
+            android:orientation="vertical"
+            android:visibility="visible" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivBarrioMain"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+
+            android:layout_marginBottom="6dp"
+            android:layout_marginStart="16dp"
+            android:paddingTop="8dp"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/tvBarrioNameMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/ivBarrioMain"
+            android:layout_centerVertical="true"
+            android:paddingLeft="16dp"
+            android:textSize="19sp"
+            android:ems="11"
+            android:textStyle="italic"
+            android:text="Barrio Santa Paula, perro" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="16dp"
+            android:textStyle="bold"
+
+            android:ems="4"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:text="LVL 999" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#5EBBDEFB"
+        android:id="@+id/rvProfileMain"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="20dp"
+            android:layout_height="3dp"
+            android:id="@+id/flProfileProgressMain"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="300dp"
             android:background="?attr/colorAccent"
             android:orientation="vertical"
             android:visibility="visible" />
@@ -129,6 +196,31 @@
             android:layout_marginStart="16dp"
             android:paddingTop="8dp"
             android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/tvProfileNameMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/ivProfileMain"
+            android:layout_centerVertical="true"
+            android:paddingLeft="16dp"
+            android:textSize="19sp"
+            android:ems="11"
+            android:textStyle="italic"
+            android:text="JUAN MANUEL FLOREZ C." />
+
+        <TextView
+            android:id="@+id/tvProfileLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="16dp"
+            android:textStyle="bold"
+
+            android:ems="4"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:text="LVL 999" />
     </RelativeLayout>
 
 
