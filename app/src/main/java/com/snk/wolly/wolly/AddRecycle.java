@@ -44,7 +44,7 @@ public class AddRecycle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cant--;
-                etCantidad.setText(cant);
+                etCantidad.setText(""+cant);
                 etCantidad.invalidate();
             }
         });
@@ -52,7 +52,7 @@ public class AddRecycle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cant++;
-                etCantidad.setText(cant);
+                etCantidad.setText(""+cant);
                 etCantidad.invalidate();
 
             }
