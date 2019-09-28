@@ -9,8 +9,11 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+//import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -20,11 +23,21 @@ public class PickRecyclable extends AppCompatActivity {
     CircleImageView ivRecycleLogo,ivBottle, ivPaper, ivCap,ivTetrapak, ivGlassBottle, ivBaterias, ivBarrioMain, ivProfileMain;
     FrameLayout flBarrioProgressMain, flProfileProgressMain;
     RelativeLayout rvProfileMain, rvBarrioMain;
+    Profile defaultProfile;
+    Barrio defaultBarrio;
+    TextView tvProfileLevel, tvBarrioLevel, tvBarrioNameMain, tvProfileNameMain;
+    float dpWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_recyclable);
+        Random rand = new Random();
+        defaultBarrio = new Barrio(rand.nextInt(100*100), "Barrio Santa Paula");
+        defaultProfile = new Profile((rand.nextInt(100*100)), "Jose Manuel Florez");
+
+
+
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,17 +57,33 @@ public class PickRecyclable extends AppCompatActivity {
         rvBarrioMain = findViewById(R.id.rvBarrioMain);
         rvProfileMain = findViewById(R.id.rvProfileMain);
 
+        tvProfileLevel = findViewById(R.id.tvProfileLevel);
+        tvBarrioLevel = findViewById(R.id.tvBarrioLevel);
+        tvProfileNameMain = findViewById(R.id.tvProfileNameMain);
+        tvBarrioNameMain = findViewById(R.id.tvBarrioNameMain);
+
+        tvProfileNameMain.setText(defaultProfile.getName());
+        tvBarrioNameMain.setText(defaultBarrio.getName());
+        tvProfileLevel.setText("LVL " + (defaultProfile.getPuntos()/100));
+        tvBarrioLevel.setText("LVL " + (defaultBarrio.getPuntos()/100));
+
         DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
-        float dpWidth = displayMetrics.widthPixels;
+        dpWidth = displayMetrics.widthPixels;
 
-
-
-        setMargins(flBarrioProgressMain, 0,0,0,0);
 
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setMargins(flBarrioProgressMain, 0,0,(int)(defaultBarrio.getPuntos()%100 *dpWidth/100),0);
+        setMargins(flProfileProgressMain, 0,0,(int)(defaultProfile.getPuntos()%100 *dpWidth/100),0);
+
+    }
+
     private void setDataOnView() {
-        GoogleSignInAccount googleSignInAccount = getIntent().getParcelableExtra(GOOGLE_ACCOUNT);
+        //GoogleSignInAccount googleSignInAccount = getIntent().getParcelableExtra(GOOGLE_ACCOUNT);
         /*Picasso.get().load(googleSignInAccount.getPhotoUrl()).centerInside().fit().into(profileImage);
         profileName.setText(googleSignInAccount.getDisplayName());
         profileEmail.setText(googleSignInAccount.getEmail());*/
