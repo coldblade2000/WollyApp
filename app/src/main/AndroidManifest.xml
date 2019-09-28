@@ -9,17 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/WolleyTheme">
+        <activity
+            android:name=".AddRecycle"
+            android:label="@string/title_activity_add_recycle"
+            android:parentActivityName=".PickRecyclable"
+            android:theme="@style/WolleyTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.snk.wolly.wolly.PickRecyclable" />
+        </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".PickRecyclable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
     <uses-permission android:name="android.permission.READ_PROFILE" />
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 </manifest>
