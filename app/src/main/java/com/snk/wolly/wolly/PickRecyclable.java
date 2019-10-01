@@ -1,14 +1,19 @@
 package com.snk.wolly.wolly;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+
+import android.transition.Fade;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,42 +43,55 @@ public class PickRecyclable extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.ivBaterias:
                     id = "ivBaterias";
+                    ivBaterias.setTransitionName("recyclable");
                     break;
                 case R.id.ivBottle:
                     id = "ivBottle";
+                    ivBottle.setTransitionName("recyclable");
                     break;
                 case R.id.ivPaper:
                     id = "ivPaper";
+                    ivPaper.setTransitionName("recyclable");
                     break;
                 case R.id.ivCap:
-                    id = "tvCap";
+                    id = "ivCap";
+                    ivCap.setTransitionName("recyclable");
                     break;
                 case R.id.ivTetrapak:
                     id = "ivTetrapak";
+                    ivTetrapak.setTransitionName("recyclable");
                     break;
                 case R.id.ivGlassBottle:
-                    id = "ivGlassBottles";
+                    id = "ivGlassBottle";
+                    ivGlassBottle.setTransitionName("recyclable");
                     break;
             }
-            clickAdd(id);
+
+            Intent intent = new Intent(PickRecyclable.this, AddRecycle.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("id", id);
+            intent.putExtras(bundle);
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(PickRecyclable.this, v, "recyclable").toBundle());
+
         }
     };
 
-    private void clickAdd(String id) {
-        Intent intent = new Intent(this, AddRecycle.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("id", id);
-        startActivity(intent);
+    private void clickAdd(String id, View v) {
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().setSharedElementExitTransition(new Fade());
+
         setContentView(R.layout.activity_pick_recyclable);
         Random rand = new Random();
         defaultBarrio = new Barrio(rand.nextInt(1000*100), "Barrio Santa Paula");
         defaultProfile = new Profile((rand.nextInt(1000*100)), "Jose Manuel Florez");
 
+        // Apply activity transition
 
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -87,6 +105,15 @@ public class PickRecyclable extends AppCompatActivity {
         ivTetrapak = (CircleImageView) findViewById(R.id.ivTetrapak);
         ivGlassBottle = (CircleImageView) findViewById(R.id.ivGlassBottle);
         ivBaterias = (CircleImageView) findViewById(R.id.ivBaterias);
+
+        int color = Color.parseColor("#4CAF50");
+        ivBottle.setColorFilter(color);
+        ivPaper.setColorFilter(color);
+        ivCap.setColorFilter(color);
+        ivTetrapak.setColorFilter(color);
+        ivGlassBottle.setColorFilter(color);
+        ivBaterias.setColorFilter(color);
+
         ivBarrioMain = (CircleImageView) findViewById(R.id.ivBarrioMain);
         ivProfileMain = (CircleImageView) findViewById(R.id.ivProfileMain);
 
@@ -132,12 +159,13 @@ public class PickRecyclable extends AppCompatActivity {
         setMargins(flBarrioProgressMain, 0,0,(int)(defaultBarrio.getPuntos()%1000 *dpWidth/1000),0);
         setMargins(flProfileProgressMain, 0,0,(int)(defaultProfile.getPuntos()%1000 *dpWidth/1000),0);
 
-        ivRecycleLogo.setOnClickListener(clickListener);
         ivBottle.setOnClickListener(clickListener);
         ivPaper.setOnClickListener(clickListener);
         ivCap.setOnClickListener(clickListener);
         ivTetrapak.setOnClickListener(clickListener);
         ivGlassBottle.setOnClickListener(clickListener);
+        ivBaterias.setOnClickListener(clickListener);
+
 
     }
 
