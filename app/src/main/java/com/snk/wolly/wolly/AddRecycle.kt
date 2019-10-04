@@ -24,20 +24,26 @@ class AddRecycle : AppCompatActivity(){
             requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
 
             // set an exit transition
-            sharedElementEnterTransition = Fade()
-            exitTransition = Explode()
+//            sharedElementEnterTransition = Fade()
+            sharedElementExitTransition = Explode()
         }
-
+        postponeEnterTransition()
         setContentView(R.layout.activity_add_recycle)
 
         val bundle = intent.extras;
+
+        val type = bundle?.get("name")
+        val name = bundle?.get("name")
+        val image = bundle?.get("image")
+        val scoreKG = bundle?.get("scoreKG")
+        val scoreUnit = bundle?.get("scoreUnit")
+
 //        tvAddName.text =
-        val type = bundle?.get("id").toString()
+        val positon = bundle?.get("position");
 
-
-
-        var  mipmap : Int;
-        when(type){
+        tvAddName.text = name.toString()
+//        val mipmap : Int
+        /*when(type){
             "ivBottle" -> {
                 mipmap = R.mipmap.bottle
                 tvAddName.text = "Plastic Bottle"
@@ -72,25 +78,24 @@ class AddRecycle : AppCompatActivity(){
 
             }
 
-        }
+        }*/
         Glide.with(this)
-                .load(mipmap)
+                .load(image)
                 .fitCenter()
                 .into(ivProfileAdd)
-
-        ivProfileAdd.setColorFilter(Color.parseColor("#4CAF50"))
+        startPostponedEnterTransition()
         val clickListener : View.OnClickListener = View.OnClickListener { view ->
             when (view.id){
                 R.id.bCantidadMenos -> {
                     count--
                 }
-                R.id.bCantiodadMas-> {
+                R.id.bCantidadMas-> {
                     count++
                 }
             }
             etCantidad.setText("$count")
         }
-        bCantiodadMas.setOnClickListener(clickListener)
+        bCantidadMas.setOnClickListener(clickListener)
         bCantidadMenos.setOnClickListener(clickListener)
 
         etCantidad.addTextChangedListener(object : TextWatcher{

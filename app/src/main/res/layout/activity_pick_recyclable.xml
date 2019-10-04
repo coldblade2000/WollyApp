@@ -17,18 +17,31 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:layout_editor_absoluteX="0dp" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/ivRecycleLogo"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="24dp"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/recycle"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-        app:srcCompat="@android:drawable/star_big_off" />
+        tools:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCards"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/rvProfileMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivRecycleLogo" />
 
     <LinearLayout
         android:id="@+id/rvGrid"
@@ -37,6 +50,7 @@
         android:gravity="center"
 
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/ivRecycleLogo">
 
         <LinearLayout
@@ -117,58 +131,59 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/rvBarrioMain"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#5EBBDEFB"
-        android:id="@+id/rvBarrioMain"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/rvProfileMain">
 
         <FrameLayout
+            android:id="@+id/flBarrioProgressMain"
             android:layout_width="0dp"
             android:layout_height="3dp"
-            android:id="@+id/flBarrioProgressMain"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginRight="130dp"
             android:background="?attr/colorAccent"
             android:orientation="vertical"
             android:visibility="visible" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivBarrioMain"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-
-            android:layout_marginBottom="6dp"
-            android:layout_marginStart="16dp"
-            android:paddingTop="8dp"
-            android:src="@drawable/ic_launcher_background" />
-
         <TextView
             android:id="@+id/tvBarrioNameMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/ivBarrioMain"
             android:layout_centerVertical="true"
-            android:paddingLeft="16dp"
-            android:textSize="19sp"
+            android:layout_toEndOf="@+id/ivBarrioMain"
             android:ems="11"
-            android:textStyle="italic"
-            android:text="Barrio Santa Paula, perro" />
+            android:paddingLeft="16dp"
+            android:text="Barrio Santa Paula, perro"
+            android:textSize="19sp"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/tvBarrioLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="16dp"
-            android:textStyle="bold"
 
             android:ems="4"
+            android:text="LVL 999"
             android:textSize="18sp"
-            android:layout_centerVertical="true"
-            android:text="LVL 999" />
+            android:textStyle="bold" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivBarrioMain"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="6dp"
+            android:paddingTop="8dp"
+            android:src="@drawable/ic_launcher_background" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -178,12 +193,12 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <FrameLayout
+            android:id="@+id/flProfileProgressMain"
             android:layout_width="0dp"
             android:layout_height="3dp"
-            android:id="@+id/flProfileProgressMain"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginRight="130dp"
             android:background="?attr/colorAccent"
             android:orientation="vertical"

@@ -8,6 +8,7 @@ public class Profile {
         this.puntos = puntos;
         this.name = name;
     }
+    public Profile(){}
 
     public int getPuntos() {
         return puntos;
