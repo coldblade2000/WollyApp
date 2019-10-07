@@ -38,6 +38,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PickRecyclable extends AppCompatActivity implements PickRecyclableClickListener {
     public static final String GOOGLE_ACCOUNT = "google_account";
+    public static final int REQUEST_CODE = 1;
+    public static final int FAILURE_CODE = -1;
+    public static final int UNIT_SUCCESS_RESULT = 1;
+    public static final int KG_SUCCESS_RESULT= 2;
     Toolbar toolbar;
     CircleImageView ivBottle, ivPaper, ivCap,ivTetrapak, ivGlassBottle, ivBaterias, ivBarrioMain, ivProfileMain;
     FrameLayout flBarrioProgressMain, flProfileProgressMain;
@@ -262,7 +266,7 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
                         Pair.create((View)imageView, "recycLogo"),
                         Pair.create((View)textView, "recycName") );
 
-        startActivityForResult(intent, 1, options.toBundle());
+        startActivityForResult(intent, REQUEST_CODE, options.toBundle());
 
     }
 
@@ -271,8 +275,21 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
         try {
             super.onActivityResult(requestCode, resultCode, data);
 
-            if(requestCode == 1 && resultCode == 1){
-                //TODO add resuult logic
+            if(requestCode == REQUEST_CODE){
+                assert data != null;
+                String name = data.getStringExtra("name");
+                switch (resultCode){
+                    case UNIT_SUCCESS_RESULT:
+                        double scoreUnit = data.getDoubleExtra("scoreUnit", 0.0);
+                        double unitCount = data.getDoubleExtra("unitCount", 0.0);
+
+                        break;
+                    case KG_SUCCESS_RESULT:
+                        double scoreKg = data.getDoubleExtra("scoreKg", 0.0);
+                        double kgCount = data.getDoubleExtra("kgCount", 0.0);
+
+                        break;
+                }
             }
         }catch (Exception e){
             Log.e("onAcitivityResult", e.getMessage());

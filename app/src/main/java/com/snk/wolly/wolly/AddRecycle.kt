@@ -1,5 +1,6 @@
 package com.snk.wolly.wolly
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_recycle.*
 import kotlinx.android.synthetic.main.content_add_recycle.*
 
@@ -22,6 +24,7 @@ class AddRecycle : AppCompatActivity(){
 
             // set an exit transition
 //            sharedElementEnterTransition = Fade()
+
             sharedElementExitTransition = Explode()
         }
         postponeEnterTransition()
@@ -29,11 +32,10 @@ class AddRecycle : AppCompatActivity(){
 
         val bundle = intent.extras;
 
-        val type = bundle?.get("name")
-        val name = bundle?.get("name")
-        val image = bundle?.get("image")
-        val scoreKG = bundle?.get("scoreKG")
-        val scoreUnit = bundle?.get("scoreUnit")
+        val name = bundle?.getString("name")
+        val image = bundle?.getInt("image")
+        val scoreKG = bundle?.getDouble("scoreKG")
+        val scoreUnit = bundle?.getDouble("scoreUnit")
 
 //        tvAddName.text =
         val positon = bundle?.get("position")
@@ -65,6 +67,7 @@ class AddRecycle : AppCompatActivity(){
             }
 
             override fun afterTextChanged(s: Editable) {
+                etPeso.isEnabled = s.isEmpty()
 
             }
 
@@ -76,9 +79,41 @@ class AddRecycle : AppCompatActivity(){
 
 
         })
-        fabAdd.setOnClickListener {
+        etPeso.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
 
-            finishAfterTransition()
+            override fun afterTextChanged(p0: Editable) {
+                etCantidad.isEnabled = p0.isEmpty()
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+        })
+        fabAdd.setOnClickListener {
+            if( etCantidad.text.isNullOrEmpty() && etPeso.text.isNullOrEmpty()){
+                Snackbar.make(fabAdd, "You need to fill the quantity or weight", Snackbar.LENGTH_SHORT);
+            }else if( !etCantidad.text.isNullOrEmpty() && etPeso.text.isNullOrEmpty() ){ // Cantidad
+                val intent = Intent()
+                intent.putExtra("name", name)
+                intent.putExtra("scoreUnit", scoreUnit)
+                intent.putExtra("unitCount", etCantidad.text.toString().toDouble())
+                setResult(PickRecyclable.UNIT_SUCCESS_RESULT, intent)
+                finishAfterTransition()
+            }else if( etCantidad.text.isNullOrEmpty() && !etPeso.text.isNullOrEmpty() ){ // Peso
+                val intent = Intent()
+                intent.putExtra("name", name)
+                intent.putExtra("scoreKg", scoreKG)
+                intent.putExtra("kgCount", (etPeso.text.toString().toDouble()))
+
+                setResult(PickRecyclable.KG_SUCCESS_RESULT, intent)
+                finishAfterTransition()
+            }else{
+                Snackbar.make(fabAdd, "How did you even manage this?", Snackbar.LENGTH_SHORT);
+            }
+
         }
     }
     private fun setCount(i : Int){

@@ -27,10 +27,10 @@ class FirebaseNotifications : FirebaseMessagingService() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random().nextInt(3000)
 
-        /*
-        Apps targeting SDK 26 or above (Android O) must implement notification channels and add its notifications
-        to at least one of them.
-      */
+        /*Apps targeting SDK 26 or above (Android O) must implement notification channels and add its notifications
+        to at least one of them.*/
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setupChannels(notificationManager)
         }
