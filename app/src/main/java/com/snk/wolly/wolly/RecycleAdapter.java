@@ -64,6 +64,7 @@ class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
         Recyclable recyclable = mDataset[position];
         Glide.with(context)
                 .load(recyclable.getImage())
+                .dontTransform()
                 .into(holder.ivRecycLogo);
         holder.tvRecycName.setText(recyclable.getName());
         ViewCompat.setTransitionName(holder.ivRecycLogo, "recycLogo");

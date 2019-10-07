@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "405238992085",
+    "firebase_url": "https://wolly-1569687603282.firebaseio.com",
+    "project_id": "wolly-1569687603282",
+    "storage_bucket": "wolly-1569687603282.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405238992085:android:8dd452d26b21222ab6665c",
+        "android_client_info": {
+          "package_name": "com.snk.wolly.wolly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405238992085-6t187g84enu054ghn0f2ljm4jhelcal4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.snk.wolly.wolly",
+            "certificate_hash": "48d5d92386322179f99317096894b7d85e76dc8e"
+          }
+        },
+        {
+          "client_id": "405238992085-e2c7rpsdpq9e323to9ucqabj6agihooh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJxQTz5BMAPq5gl9FwTlkjDNHyVYG476E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405238992085-flh427scj7qb11r8u2dauamfugd2shpl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

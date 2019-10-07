@@ -1,12 +1,9 @@
 package com.snk.wolly.wolly
 
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.transition.Explode
-import android.transition.Fade
 import android.view.View
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
@@ -39,49 +36,13 @@ class AddRecycle : AppCompatActivity(){
         val scoreUnit = bundle?.get("scoreUnit")
 
 //        tvAddName.text =
-        val positon = bundle?.get("position");
+        val positon = bundle?.get("position")
 
         tvAddName.text = name.toString()
-//        val mipmap : Int
-        /*when(type){
-            "ivBottle" -> {
-                mipmap = R.mipmap.bottle
-                tvAddName.text = "Plastic Bottle"
-            }
-            "ivCap" -> {
-                mipmap = R.mipmap.cap
-                tvAddName.text = "Plastic Cap"
-            }
-            "ivGlassBottle" -> {
-                mipmap = R.mipmap.glass
-                tvAddName.text = "Glass Bottle"
 
-            }
-            "ivPaper" -> {
-                mipmap = R.mipmap.paper
-                tvAddName.text = "Paper"
-
-            }
-            "ivTetrapak" -> {
-                mipmap = R.mipmap.tetra
-                tvAddName.text = "TetraPak"
-
-            }
-            "ivBaterias" -> {
-                mipmap = R.mipmap.battery
-                tvAddName.text = "Battery"
-
-            }
-            else -> {
-                mipmap = R.mipmap.tetra
-                tvAddName.text = "N U L L"
-
-            }
-
-        }*/
         Glide.with(this)
                 .load(image)
-                .fitCenter()
+                .dontTransform()
                 .into(ivProfileAdd)
         startPostponedEnterTransition()
         val clickListener : View.OnClickListener = View.OnClickListener { view ->

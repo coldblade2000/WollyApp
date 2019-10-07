@@ -2,40 +2,20 @@ package com.snk.wolly.wolly;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.ActivityOptions;
 import android.content.Intent;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
-
-import android.provider.ContactsContract;
 import android.transition.Explode;
-import android.transition.Fade;
 import android.util.DisplayMetrics;
-
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
-
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-//import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -44,12 +24,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Random;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+//import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 public class PickRecyclable extends AppCompatActivity implements PickRecyclableClickListener {
     public static final String GOOGLE_ACCOUNT = "google_account";
@@ -188,55 +173,13 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
         mAdapter = new RecycleAdapter(getApplicationContext(), mDataset, (PickRecyclableClickListener) this);
         rvCards.setAdapter(mAdapter);
 
-
         ivBarrioMain = (CircleImageView) findViewById(R.id.ivBarrioMain);
         ivProfileMain = (CircleImageView) findViewById(R.id.ivProfileMain);
 
-//        Glide.with(this)
-//                .load(R.mipmap.bottle)
-//                .into(ivBottle);
-//        Glide.with(this)
-//                .load(R.mipmap.paper)
-//                .into(ivPaper);
-//        Glide.with(this)
-//                .load(R.mipmap.cap)
-//                .into(ivCap);
-//        Glide.with(this)
-//                .load(R.mipmap.tetra)
-//                .into(ivTetrapak);
-//        Glide.with(this)
-//                .load(R.mipmap.glass)
-//                .into(ivGlassBottle);
-//        Glide.with(this)
-//                .load(R.mipmap.battery)
-//                .into(ivBaterias);
-
-
-
-//        flBarrioProgressMain = findViewById(R.id.flBarrioProgressMain);
-
-
-//        rvBarrioMain = findViewById(R.id.rvBarrioMain);
         rvProfileMain = findViewById(R.id.rvProfileMain);
 
         tvProfileLevel = findViewById(R.id.tvProfileLevel);
-//        tvBarrioLevel = findViewById(R.id.tvBarrioLevel);
         tvProfileNameMain = findViewById(R.id.tvProfileNameMain);
-//        tvBarrioNameMain = findViewById(R.id.tvBarrioNameMain);
-
-        /*tvProfileNameMain.setText(defaultProfile.getName());
-//        tvBarrioNameMain.setText(defaultBarrio.getName());
-        tvProfileLevel.setText("LVL " + (defaultProfile.getPuntos()/1000));*/
-//        tvBarrioLevel.setText("LVL " + (defaultBarrio.getPuntos()/1000));
-
-
-        /*ivBottle.setOnClickListener(clickListener);
-        ivPaper.setOnClickListener(clickListener);
-        ivCap.setOnClickListener(clickListener);
-        ivTetrapak.setOnClickListener(clickListener);
-        ivGlassBottle.setOnClickListener(clickListener);
-        ivBaterias.setOnClickListener(clickListener);*/
-
 
     }
 
@@ -253,19 +196,8 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
 
     }
 
-    private void setDataOnView() {
-        //GoogleSignInAccount googleSignInAccount = getIntent().getParcelableExtra(GOOGLE_ACCOUNT);
-        /*Picasso.get().load(googleSignInAccount.getPhotoUrl()).centerInside().fit().into(profileImage);
-        profileName.setText(googleSignInAccount.getDisplayName());
-        profileEmail.setText(googleSignInAccount.getEmail());*/
-    }
     private void setMargins (final View view, int points, boolean didLevelIncrease) {
-        /*if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
 
-            p.setMargins(left, top, right, bottom);
-            view.requestLayout();
-        }*///1000 - defaultProfile.getPuntos()%1000) *dpWidth/1000)
         final int newMargin = (int)((1000 - points%1000) *dpWidth/1000);
 
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) view.getLayoutParams();
@@ -300,19 +232,6 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
                 }
             });
 
-            /*Animation b = new Animation(){
-                @Override
-                protected void applyTransformation(float interpolatedTime, Transformation t) {
-                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) view.getLayoutParams();
-                    lp.rightMargin = oldMarginGlobal - (int)(oldMarginGlobal / interpolatedTime);
-                    //lp.setMargins(0, 0, right, bottom);
-                    view.setLayoutParams(lp);
-                }
-
-            };
-            b.setDuration(1000);
-            view.startAnimation(b);*/
-            oldMarginGlobal = 0;
         }else {
 
             ValueAnimator animator = ValueAnimator.ofInt(oldMarginGlobal, newMargin);
@@ -327,19 +246,6 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
                 }
             });
         }
-        /*Animation a = new Animation(){
-            @Override
-            protected void applyTransformation(float interpolatedTime, Transformation t) {
-                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) view.getLayoutParams();
-                int oldMargin = lp.rightMargin;
-                lp.rightMargin = (int)(newMargin / interpolatedTime);
-                //lp.setMargins(0, 0, right, bottom);
-                view.setLayoutParams(lp);
-            }
-
-        };
-        a.setDuration(1000);
-        view.startAnimation(a);*/
     }
 
 
