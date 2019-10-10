@@ -162,7 +162,7 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
 
         ivRecycleLogo = findViewById(R.id.ivRecycleLogo);
         Glide.with(this)
-                .load(R.mipmap.logo_transparent)
+                .load(R.mipmap.logo)
                 .into(ivRecycleLogo);
 
 
