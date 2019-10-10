@@ -131,61 +131,6 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/rvBarrioMain"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#5EBBDEFB"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/rvProfileMain">
-
-        <FrameLayout
-            android:id="@+id/flBarrioProgressMain"
-            android:layout_width="0dp"
-            android:layout_height="3dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="130dp"
-            android:background="?attr/colorAccent"
-            android:orientation="vertical"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/tvBarrioNameMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/ivBarrioMain"
-            android:ems="11"
-            android:paddingLeft="16dp"
-            android:text="Barrio Santa Paula, perro"
-            android:textSize="19sp"
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/tvBarrioLevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-
-            android:ems="4"
-            android:text="LVL 999"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivBarrioMain"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="6dp"
-            android:paddingTop="8dp"
-            android:src="@drawable/ic_launcher_background" />
-    </RelativeLayout>
-    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#5EBBDEFB"
@@ -199,7 +144,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="130dp"
+            android:layout_marginRight="320dp"
             android:background="?attr/colorAccent"
             android:orientation="vertical"
             android:visibility="visible" />
@@ -209,22 +154,22 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
 
-            android:layout_marginBottom="6dp"
             android:layout_marginStart="16dp"
+            android:layout_marginBottom="6dp"
             android:paddingTop="8dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@mipmap/profile" />
 
         <TextView
             android:id="@+id/tvProfileNameMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/ivProfileMain"
             android:layout_centerVertical="true"
-            android:paddingLeft="16dp"
-            android:textSize="19sp"
+            android:layout_toEndOf="@+id/ivProfileMain"
             android:ems="11"
-            android:textStyle="italic"
-            android:text="JUAN MANUEL FLOREZ C." />
+            android:paddingLeft="16dp"
+            android:text="Nombre"
+            android:textSize="19sp"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/tvProfileLevel"

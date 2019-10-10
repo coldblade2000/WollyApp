@@ -15,7 +15,8 @@ public class Recyclable {
     public static final int TETRAPAK= 3;
     public static final int GLASSBOTTLE = 4;
     public static final int BATTERY = 5;
-    private String[] names = {"Plastic Bottle" ,"Paper", "Plastic Cap", "TetraPak", "Glass Bottle", "Battery"};
+    private String[] namesEnglish = {"Plastic Bottle" ,"Paper", "Plastic Cap", "TetraPak", "Glass Bottle", "Battery"};
+    private String[] names = {"Botella de plastico" ,"Papel", "Tapa de botella", "TetraPak", "Botella de vidrio", "Pila AA"};
 
 
 

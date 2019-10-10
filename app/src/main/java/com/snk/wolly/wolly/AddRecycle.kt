@@ -15,9 +15,12 @@ import kotlinx.android.synthetic.main.content_add_recycle.*
 
 class AddRecycle : AppCompatActivity(){
     private var count = 0
+    var name: String? = ""
+    var scoreKG: Double?= 0.0
+    var scoreUnit: Double? = 0.0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         with(window) {
             requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
@@ -32,10 +35,10 @@ class AddRecycle : AppCompatActivity(){
 
         val bundle = intent.extras;
 
-        val name = bundle?.getString("name")
+        name = bundle?.getString("name")
         val image = bundle?.getInt("image")
-        val scoreKG = bundle?.getDouble("scoreKG")
-        val scoreUnit = bundle?.getDouble("scoreUnit")
+        scoreKG = bundle?.getDouble("scoreKG")
+        scoreUnit = bundle?.getDouble("scoreUnit")
 
 //        tvAddName.text =
         val positon = bundle?.get("position")
@@ -74,6 +77,11 @@ class AddRecycle : AppCompatActivity(){
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.isNullOrBlank()){
                     setCount(s.toString().toInt())
+                    val value : Double = try{s.toString().toDouble()} catch (e: NumberFormatException){ 0.0 }
+                    updatePointCounter(value, false)
+                }else{
+                    setCount(0)
+                    updatePointCounter(0.0, false)
                 }
             }
 
@@ -87,14 +95,17 @@ class AddRecycle : AppCompatActivity(){
                 etCantidad.isEnabled = p0.isEmpty()
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val value : Double = try{s.toString().toDouble()} catch (e: NumberFormatException){ 0.0 }
+
+                updatePointCounter(value, true)
 
             }
 
         })
         fabAdd.setOnClickListener {
             if( etCantidad.text.isNullOrEmpty() && etPeso.text.isNullOrEmpty()){
-                Snackbar.make(fabAdd, "You need to fill the quantity or weight", Snackbar.LENGTH_SHORT);
+                Snackbar.make(fabAdd, "No puedes dejar ambas opciones vacias", Snackbar.LENGTH_SHORT);
             }else if( !etCantidad.text.isNullOrEmpty() && etPeso.text.isNullOrEmpty() ){ // Cantidad
                 val intent = Intent()
                 intent.putExtra("name", name)
@@ -118,6 +129,17 @@ class AddRecycle : AppCompatActivity(){
     }
     private fun setCount(i : Int){
         count = i
+    }
+    private fun updatePointCounter(count : Double, isWeighable : Boolean){
+        val text: String
+        if(isWeighable){
+            text = "+" + count*scoreKG!! + " puntos!"
+        }else{
+            text = "+" + count*scoreUnit!! + " puntos!"
+
+        }
+        tvPointCounter.text = text
+
     }
 
 }

@@ -37,7 +37,7 @@ exports.receivekgdelta = functions.https.onRequest((req, res) => {
     //
     return cors(req, res, () => {
         const reference = db.ref("User/");
-        const unsetKg = reference.child("unsetKg");
+        const unsetKg = reference.child("unsetKG");
         const weightDelta : number = req.body.weightdelta;
         unsetKg.once("value", function (data) {
             const newValue : number = +Number(data.val()) + +Number(weightDelta);

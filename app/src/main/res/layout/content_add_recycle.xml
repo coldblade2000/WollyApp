@@ -15,7 +15,7 @@
         android:layout_marginTop="49dp"
         android:ems="5"
         android:hint="0 kg"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -65,7 +65,8 @@
         app:layout_constraintBottom_toTopOf="@+id/tvAddName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/battery" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -154,6 +155,18 @@
         android:textStyle="italic"
         android:transitionName="recycName"
         app:layout_constraintBottom_toTopOf="@+id/etCantidad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfileAdd" />
+
+    <TextView
+        android:id="@+id/tvPointCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+0 puntos!"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/tvAddName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivProfileAdd" />

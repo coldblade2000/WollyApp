@@ -71,9 +71,9 @@ class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
         ViewCompat.setTransitionName(holder.tvRecycName, "recycName");
 
         if(recyclable.isWeighable()){
-            holder.tvRecycSub.setText(String.format("+%s points per kilogram", recyclable.getScorePerKg()));
+            holder.tvRecycSub.setText(String.format("+%s puntos por kilogramo", recyclable.getScorePerKg()));
         }else{
-            holder.tvRecycSub.setText(String.format("+%s points per %s", recyclable.getScorePerUnit(), recyclable.getName().toLowerCase()));
+            holder.tvRecycSub.setText(String.format("+%s puntos por %s", recyclable.getScorePerUnit(), recyclable.getName().toLowerCase()));
 
         }
 
