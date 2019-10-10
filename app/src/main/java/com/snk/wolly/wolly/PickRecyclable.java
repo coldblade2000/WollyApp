@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.transition.Explode;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -117,7 +119,8 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
 
                     if(defaultProfile.getUnsetKG() != 0.0 ){
                         AlertDialog.Builder builder = new AlertDialog.Builder(PickRecyclable.this);
-                        builder.setTitle("Tienes reciclables sin categorizar!");
+                        String title = String.format("Tienes %skg de reciclables sin categorizar!", defaultProfile.getUnsetKG());
+                        builder.setTitle(title);
                         builder.setCancelable(false);
                         CharSequence[] recyclables = new CharSequence[mDataset.length];
                         for (int i=0; i<mDataset.length; i++){
@@ -126,10 +129,11 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
                         builder.setItems(recyclables, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                double oldPoints = defaultProfile.getPuntos();
                                 double addedPoints = defaultProfile.categorizeUnsetKG(mDataset[which]);
-                                Profile newProfile = new Profile((int)(defaultProfile.getPuntos() + addedPoints), defaultProfile.getName());
+                                Profile newProfile = new Profile((int)(addedPoints), defaultProfile.getName());
                                 userRef.setValue(newProfile);
-                                Toast.makeText(getApplicationContext(), "Ganaste +"+addedPoints+" puntos!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Ganaste +"+(addedPoints-oldPoints)+" puntos!", Toast.LENGTH_LONG).show();
                             }
                         });
                         builder.create();
@@ -148,6 +152,7 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
                 }
 
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -183,6 +188,40 @@ public class PickRecyclable extends AppCompatActivity implements PickRecyclableC
                 .fitCenter()
                 .into(ivProfileMain);
         rvProfileMain = findViewById(R.id.rvProfileMain);
+        rvProfileMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(PickRecyclable.this);
+                final EditText edittext = new EditText(PickRecyclable.this);
+                alert.setTitle("Cambiar nombre de perfil:");
+                edittext.setHint("Pepito");
+                edittext.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+
+                alert.setView(edittext);
+                alert.setPositiveButton("Cambiar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(edittext.getText() != null && !edittext.getText().toString().isEmpty()){
+                            DatabaseReference childName = userRef.child("name");
+                            childName.setValue(edittext.getText().toString());
+                            dialog.dismiss();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+                alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = alert.create();
+                dialog.show();
+            }
+        });
+
 
         tvProfileLevel = findViewById(R.id.tvProfileLevel);
         tvProfileNameMain = findViewById(R.id.tvProfileNameMain);
